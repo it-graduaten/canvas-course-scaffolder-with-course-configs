@@ -159,7 +159,7 @@ class ConfigReader:
             modules.append(
                 Module(
                     name=row[0],
-                    published=row[1]
+                    published=True if row[1] == 1 else False,
                 ))
         return modules
 
@@ -191,7 +191,7 @@ class ConfigReader:
                 ModuleContent(
                     type=row[1],
                     display_name=row[2],
-                    published=row[3],
+                    published=True if row[3] == 1 else False,
                     assignment=row[4],
                     url=row[5],
                     quiz=row[6],

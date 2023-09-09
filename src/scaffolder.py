@@ -273,6 +273,7 @@ class Scaffolder:
                 'name': module.name,
             })
             module.id = m.id
+            m.edit(module={'published': module.published})
             # Scaffold the contents
             for content in module.contents:
                 item = None
@@ -336,10 +337,6 @@ class Scaffolder:
                         'published': content.published,
                     })
 
-                if not content.published:
-                    item.edit(module_item={'published': content.published})
-
-            if not module.published:
-                m.edit(module={'published': module.published})
+                item.edit(module_item={'published': content.published})
 
         print("Modules scaffolded.")
