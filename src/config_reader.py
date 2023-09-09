@@ -12,7 +12,7 @@ from src.models.module_content import ModuleContent
 
 def if_empty_throw_error(value, error_message):
     """ Throws an error if the value is empty """
-    if value == None or value == "":
+    if value is None or value == "":
         raise Exception(error_message)
 
 
@@ -60,7 +60,7 @@ class ConfigReader:
         assignment_groups_sheet = workbook["Opdrachtgroepen"]
         for row in assignment_groups_sheet.iter_rows(min_row=2, values_only=True):
             # If name is empty, skip this row
-            if row[1] == None or row[1] == "":
+            if row[1] is None or row[1] == "":
                 continue
 
             assignment_groups.append(
@@ -77,12 +77,12 @@ class ConfigReader:
         assignments_sheet = workbook["Opdrachten"]
         for row in assignments_sheet.iter_rows(min_row=2, values_only=True):
             # If name is empty, skip this row
-            if row[1] == None or row[1] == "":
+            if row[1] is None or row[1] == "":
                 continue
 
             assignment_description_file = row[7]
             # Check if the assignment description file exists
-            if assignment_description_file != None and assignment_description_file != "":
+            if assignment_description_file is not None and assignment_description_file != "":
                 if_file_not_found_throw_error(
                     os.path.join(self.path_to_config_folder, 'opdrachten',
                                  assignment_description_file),
@@ -109,7 +109,7 @@ class ConfigReader:
         quizzes_sheet = workbook["Toetsen"]
         for row in quizzes_sheet.iter_rows(min_row=2, values_only=True):
             # If name is empty, skip this row
-            if row[1] == None or row[1] == "":
+            if row[1] is None or row[1] == "":
                 continue
 
             quizzes.append(
@@ -130,19 +130,19 @@ class ConfigReader:
         pages_sheet = workbook["Pagina's"]
         for row in pages_sheet.iter_rows(min_row=2, values_only=True):
             # If the id is empty, skip this row
-            if row[1] == None or row[1] == "":
+            if row[1] is None or row[1] == "":
                 continue
 
             page_content_file = row[2]
             # Check if the assignment description file exists
-            if page_content_file != None and page_content_file != "":
+            if page_content_file is not None and page_content_file != "":
                 if not os.path.isfile(os.path.join(self.path_to_config_folder, 'paginas', page_content_file)):
                     raise Exception(
                         f"Page content file {page_content_file} not found")
             pages.append(Page(
                 title=row[0],
                 published=row[1],
-                body='' if page_content_file == None else read_file_content(
+                body='' if page_content_file is None else read_file_content(
                     os.path.join(self.path_to_config_folder, 'paginas', page_content_file)),
             ))
         return pages
@@ -153,7 +153,7 @@ class ConfigReader:
         modules_sheet = workbook["Modules"]
         for row in modules_sheet.iter_rows(min_row=2, values_only=True):
             # If name is empty, skip this row
-            if row[1] == None or row[1] == "":
+            if row[1] is None or row[1] == "":
                 continue
 
             modules.append(
@@ -168,7 +168,7 @@ class ConfigReader:
         module_contents_sheet = workbook["Module inhoud"]
         for row in module_contents_sheet.iter_rows(min_row=2, values_only=True):
             # If the module is empty, skip this row
-            if row[0] == None or row[0] == "":
+            if row[0] is None or row[0] == "":
                 continue
             # Find the module with the name
             module = next((m for m in modules if m.name == row[0]), None)
@@ -183,6 +183,9 @@ class ConfigReader:
                     f"File {file_path} not found")
                 file_path = os.path.join(self.path_to_config_folder, 'bestanden', file_path)
 
+            # Retrieve the indent, if present in the config file.
+            indent = row[8] if len(row) >= 9 and row[8] is not None else 0
+
             # Add the content to the module
             module.contents.append(
                 ModuleContent(
@@ -193,6 +196,7 @@ class ConfigReader:
                     url=row[5],
                     quiz=row[6],
                     file_path=file_path,
+                    indent=indent,
                 ))
 
         return modules
