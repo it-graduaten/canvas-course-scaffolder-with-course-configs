@@ -115,7 +115,7 @@ class ConfigReader:
             quizzes.append(
                 Quiz(
                     assignment_group=row[0],
-                    name=row[1],
+                    title=row[1],
                     due_at=row[2],
                     available_at=row[3],
                     available_until=row[4],
