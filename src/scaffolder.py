@@ -216,6 +216,7 @@ class Scaffolder:
         # Delete all existing assignments
         existing_assignments = self.course.get_assignments()
         for assignment in existing_assignments:
+            print("Deleting assignment: " + assignment.name)
             assignment.delete()
         # Scaffold the assignments
         for assignment in assignments:
@@ -353,7 +354,9 @@ class Scaffolder:
                         'indent': content.indent,
                         'published': content.published,
                     })
-
-                item.edit(module_item={'published': content.published})
+                try:
+                    item.edit(module_item={'published': content.published})
+                except:
+                    print(f'{item.title} publish state could not be updated.')
 
         print("Modules scaffolded.")
