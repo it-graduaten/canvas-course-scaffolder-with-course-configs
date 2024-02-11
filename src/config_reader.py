@@ -18,7 +18,7 @@ def if_empty_throw_error(value, error_message):
 
 def read_file_content(file_path):
     """ Reads the content of a file and returns it as a string """
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding='utf8') as file:
         content = file.read()
     file.close()
     return content
