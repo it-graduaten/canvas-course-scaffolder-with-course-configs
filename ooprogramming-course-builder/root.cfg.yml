@@ -1,0 +1,15 @@
+title: "OO Programming"
+description: "Leer de basisprincipes van Object Oriented Programming."
+authors:
+  - name: "Joren Synaeve"
+    email: "joren.synaeve@thomasmore.be"
+assignment_groups:
+  - name: "Permanente evaluatie"
+    weight: 60
+  - name: "Tussentijds examen"
+    weight: 20
+  - name: "Eindexamen"
+    weight: 20
+canvas:
+  course_id: 10139
+  thumbnail: "thumbnails/oo-programming.png"
