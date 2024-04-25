@@ -5,11 +5,11 @@ authors:
     email: "joren.synaeve@thomasmore.be"
 assignment_groups:
   - name: "Permanente evaluatie"
-    weight: 60
+    weight: 50
   - name: "Tussentijds examen"
-    weight: 20
+    weight: 25
   - name: "Eindexamen"
-    weight: 20
+    weight: 25
 canvas:
   course_id: 10139
   thumbnail: "thumbnails/oo-programming.png"
