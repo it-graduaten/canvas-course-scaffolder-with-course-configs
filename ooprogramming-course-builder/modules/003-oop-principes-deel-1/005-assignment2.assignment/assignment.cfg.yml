@@ -4,3 +4,4 @@ lock_at: null
 points_possible: 10
 published: true
 omit_from_final_grade: true
+assignment_group: "Assignment"

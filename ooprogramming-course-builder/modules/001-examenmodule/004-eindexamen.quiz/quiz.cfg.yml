@@ -1,7 +1,7 @@
 title: "Tussentijds examen"
 quiz_type: "assignment"
 points_possible: 100
-assignment_group_id: TODO
+assignment_group: "Eindexamen"
 allowed_attempts: 1
 published: false
 due_at: "2013-01-23T23:59:00-07:00"
